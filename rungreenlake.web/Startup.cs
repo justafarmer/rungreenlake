@@ -12,6 +12,8 @@ using rungreenlake.web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using rungreenlake.web.Areas.Identity.Data;
+using rungreenlake.data;
 
 namespace rungreenlake.web
 {
@@ -30,8 +32,8 @@ namespace rungreenlake.web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<rungreenlakeUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<Context>();
             services.AddRazorPages();
         }
 
