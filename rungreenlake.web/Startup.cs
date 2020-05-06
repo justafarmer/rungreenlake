@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using rungreenlake.web.Areas.Identity.Data;
 using rungreenlake.data;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using rungreenlake.web.Services;
 
 namespace rungreenlake.web
 {
@@ -34,6 +36,8 @@ namespace rungreenlake.web
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<rungreenlakeUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<Context>();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddRazorPages();
         }
 
