@@ -9,6 +9,5 @@ namespace rungreenlake.web.Areas.Identity.Data
     // Add profile data for application users by adding properties to the rungreenlakeUser class
     public class rungreenlakeUser : IdentityUser
     {
-        public int MyProperty { get; set; }
     }
 }
