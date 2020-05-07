@@ -156,7 +156,7 @@ namespace rungreenlake.web.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("rungreenlake.web.Areas.Identity.Data.rungreenlakeUser", b =>
+            modelBuilder.Entity("rungreenlake.web.Areas.Identity.Data.RunGreenLakeUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -232,7 +232,7 @@ namespace rungreenlake.web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("rungreenlake.web.Areas.Identity.Data.rungreenlakeUser", null)
+                    b.HasOne("rungreenlake.web.Areas.Identity.Data.RunGreenLakeUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -241,7 +241,7 @@ namespace rungreenlake.web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("rungreenlake.web.Areas.Identity.Data.rungreenlakeUser", null)
+                    b.HasOne("rungreenlake.web.Areas.Identity.Data.RunGreenLakeUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -256,7 +256,7 @@ namespace rungreenlake.web.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("rungreenlake.web.Areas.Identity.Data.rungreenlakeUser", null)
+                    b.HasOne("rungreenlake.web.Areas.Identity.Data.RunGreenLakeUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -265,7 +265,7 @@ namespace rungreenlake.web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("rungreenlake.web.Areas.Identity.Data.rungreenlakeUser", null)
+                    b.HasOne("rungreenlake.web.Areas.Identity.Data.RunGreenLakeUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
