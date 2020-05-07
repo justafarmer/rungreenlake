@@ -34,7 +34,7 @@ namespace rungreenlake.web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<rungreenlakeUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<RunGreenLakeUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<Context>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
