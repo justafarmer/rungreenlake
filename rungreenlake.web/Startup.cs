@@ -12,6 +12,10 @@ using rungreenlake.web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using rungreenlake.web.Areas.Identity.Data;
+using rungreenlake.data;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using rungreenlake.web.Services;
 
 namespace rungreenlake.web
 {
@@ -30,8 +34,10 @@ namespace rungreenlake.web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<RunGreenLakeUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<Context>();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddRazorPages();
         }
 
