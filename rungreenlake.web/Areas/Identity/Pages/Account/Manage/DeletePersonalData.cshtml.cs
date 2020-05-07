@@ -11,13 +11,13 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account.Manage
 {
     public class DeletePersonalDataModel : PageModel
     {
-        private readonly UserManager<rungreenlakeUser> _userManager;
-        private readonly SignInManager<rungreenlakeUser> _signInManager;
+        private readonly UserManager<RunGreenLakeUser> _userManager;
+        private readonly SignInManager<RunGreenLakeUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
 
         public DeletePersonalDataModel(
-            UserManager<rungreenlakeUser> userManager,
-            SignInManager<rungreenlakeUser> signInManager,
+            UserManager<RunGreenLakeUser> userManager,
+            SignInManager<RunGreenLakeUser> signInManager,
             ILogger<DeletePersonalDataModel> logger)
         {
             _userManager = userManager;

@@ -12,13 +12,13 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account.Manage
 {
     public class ResetAuthenticatorModel : PageModel
     {
-        UserManager<rungreenlakeUser> _userManager;
-        private readonly SignInManager<rungreenlakeUser> _signInManager;
+        UserManager<RunGreenLakeUser> _userManager;
+        private readonly SignInManager<RunGreenLakeUser> _signInManager;
         ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
-            UserManager<rungreenlakeUser> userManager,
-            SignInManager<rungreenlakeUser> signInManager,
+            UserManager<RunGreenLakeUser> userManager,
+            SignInManager<RunGreenLakeUser> signInManager,
             ILogger<ResetAuthenticatorModel> logger)
         {
             _userManager = userManager;

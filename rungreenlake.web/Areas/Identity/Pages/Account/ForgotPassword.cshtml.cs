@@ -17,10 +17,10 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<rungreenlakeUser> _userManager;
+        private readonly UserManager<RunGreenLakeUser> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<rungreenlakeUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<RunGreenLakeUser> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

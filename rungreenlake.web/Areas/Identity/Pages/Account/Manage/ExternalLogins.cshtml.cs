@@ -12,12 +12,12 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account.Manage
 {
     public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<rungreenlakeUser> _userManager;
-        private readonly SignInManager<rungreenlakeUser> _signInManager;
+        private readonly UserManager<RunGreenLakeUser> _userManager;
+        private readonly SignInManager<RunGreenLakeUser> _signInManager;
 
         public ExternalLoginsModel(
-            UserManager<rungreenlakeUser> userManager,
-            SignInManager<rungreenlakeUser> signInManager)
+            UserManager<RunGreenLakeUser> userManager,
+            SignInManager<RunGreenLakeUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

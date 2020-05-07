@@ -21,7 +21,7 @@ namespace rungreenlake.web.Areas.Identity
                         context.Configuration.GetConnectionString("DefaultConnection"),
                         x => x.MigrationsAssembly("rungreenlake.web")));
 
-                //services.AddDefaultIdentity<rungreenlakeUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                //services.AddDefaultIdentity<RunGreenLakeUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 //    .AddEntityFrameworkStores<Context>();
             });
         }

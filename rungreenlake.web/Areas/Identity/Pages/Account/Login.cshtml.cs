@@ -18,14 +18,14 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<rungreenlakeUser> _userManager;
-        private readonly SignInManager<rungreenlakeUser> _signInManager;
+        private readonly UserManager<RunGreenLakeUser> _userManager;
+        private readonly SignInManager<RunGreenLakeUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public LoginModel(SignInManager<rungreenlakeUser> signInManager, 
+        public LoginModel(SignInManager<RunGreenLakeUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<rungreenlakeUser> userManager,
+            UserManager<RunGreenLakeUser> userManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;

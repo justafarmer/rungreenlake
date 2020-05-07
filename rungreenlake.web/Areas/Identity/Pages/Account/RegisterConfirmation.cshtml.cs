@@ -13,10 +13,10 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
-        private readonly UserManager<rungreenlakeUser> _userManager;
+        private readonly UserManager<RunGreenLakeUser> _userManager;
         private readonly IEmailSender _sender;
 
-        public RegisterConfirmationModel(UserManager<rungreenlakeUser> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<RunGreenLakeUser> userManager, IEmailSender sender)
         {
             _userManager = userManager;
             _sender = sender;

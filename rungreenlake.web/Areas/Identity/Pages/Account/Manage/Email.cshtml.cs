@@ -16,13 +16,13 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account.Manage
 {
     public partial class EmailModel : PageModel
     {
-        private readonly UserManager<rungreenlakeUser> _userManager;
-        private readonly SignInManager<rungreenlakeUser> _signInManager;
+        private readonly UserManager<RunGreenLakeUser> _userManager;
+        private readonly SignInManager<RunGreenLakeUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public EmailModel(
-            UserManager<rungreenlakeUser> userManager,
-            SignInManager<rungreenlakeUser> signInManager,
+            UserManager<RunGreenLakeUser> userManager,
+            SignInManager<RunGreenLakeUser> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -50,7 +50,7 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account.Manage
             public string NewEmail { get; set; }
         }
 
-        private async Task LoadAsync(rungreenlakeUser user)
+        private async Task LoadAsync(RunGreenLakeUser user)
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;

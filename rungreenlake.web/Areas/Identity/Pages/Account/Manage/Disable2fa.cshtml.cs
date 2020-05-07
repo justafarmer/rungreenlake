@@ -12,11 +12,11 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account.Manage
 {
     public class Disable2faModel : PageModel
     {
-        private readonly UserManager<rungreenlakeUser> _userManager;
+        private readonly UserManager<RunGreenLakeUser> _userManager;
         private readonly ILogger<Disable2faModel> _logger;
 
         public Disable2faModel(
-            UserManager<rungreenlakeUser> userManager,
+            UserManager<RunGreenLakeUser> userManager,
             ILogger<Disable2faModel> logger)
         {
             _userManager = userManager;

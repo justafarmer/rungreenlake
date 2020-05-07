@@ -1,4 +1,4 @@
-﻿@inject SignInManager<rungreenlakeUser> SignInManager
+﻿@inject SignInManager<RunGreenLakeUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

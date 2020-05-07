@@ -14,10 +14,10 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<rungreenlakeUser> _signInManager;
+        private readonly SignInManager<RunGreenLakeUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 
-        public LogoutModel(SignInManager<rungreenlakeUser> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<RunGreenLakeUser> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

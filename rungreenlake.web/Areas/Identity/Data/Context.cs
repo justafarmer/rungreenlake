@@ -9,8 +9,12 @@ using rungreenlake.web.Areas.Identity.Data;
 
 namespace rungreenlake.data
 {
-    public class Context : IdentityDbContext<rungreenlakeUser>
+    public class Context : IdentityDbContext<RunGreenLakeUser>
     {
+        public Context()
+        {
+        }
+        
         public Context(DbContextOptions<Context> options)
             : base(options)
         {
@@ -19,9 +23,7 @@ namespace rungreenlake.data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
+            builder.Entity<RunGreenLakeUser>().HasMany(u => u.BuddyStates).WithOne(u => u.SecondProfile);
         }
     }
 }

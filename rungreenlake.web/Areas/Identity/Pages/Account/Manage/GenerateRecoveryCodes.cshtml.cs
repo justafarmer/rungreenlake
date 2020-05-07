@@ -12,11 +12,11 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account.Manage
 {
     public class GenerateRecoveryCodesModel : PageModel
     {
-        private readonly UserManager<rungreenlakeUser> _userManager;
+        private readonly UserManager<RunGreenLakeUser> _userManager;
         private readonly ILogger<GenerateRecoveryCodesModel> _logger;
 
         public GenerateRecoveryCodesModel(
-            UserManager<rungreenlakeUser> userManager,
+            UserManager<RunGreenLakeUser> userManager,
             ILogger<GenerateRecoveryCodesModel> logger)
         {
             _userManager = userManager;

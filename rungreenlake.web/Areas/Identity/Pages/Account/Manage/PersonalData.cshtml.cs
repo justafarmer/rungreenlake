@@ -9,11 +9,11 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account.Manage
 {
     public class PersonalDataModel : PageModel
     {
-        private readonly UserManager<rungreenlakeUser> _userManager;
+        private readonly UserManager<RunGreenLakeUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
 
         public PersonalDataModel(
-            UserManager<rungreenlakeUser> userManager,
+            UserManager<RunGreenLakeUser> userManager,
             ILogger<PersonalDataModel> logger)
         {
             _userManager = userManager;

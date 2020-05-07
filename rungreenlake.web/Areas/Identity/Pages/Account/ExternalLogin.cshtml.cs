@@ -20,14 +20,14 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel
     {
-        private readonly SignInManager<rungreenlakeUser> _signInManager;
-        private readonly UserManager<rungreenlakeUser> _userManager;
+        private readonly SignInManager<RunGreenLakeUser> _signInManager;
+        private readonly UserManager<RunGreenLakeUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
-            SignInManager<rungreenlakeUser> signInManager,
-            UserManager<rungreenlakeUser> userManager,
+            SignInManager<RunGreenLakeUser> signInManager,
+            UserManager<RunGreenLakeUser> userManager,
             ILogger<ExternalLoginModel> logger,
             IEmailSender emailSender)
         {
@@ -122,7 +122,7 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new rungreenlakeUser { UserName = Input.Email, Email = Input.Email };
+                var user = new RunGreenLakeUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

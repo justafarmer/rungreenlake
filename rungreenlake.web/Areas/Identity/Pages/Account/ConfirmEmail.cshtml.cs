@@ -15,9 +15,9 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<rungreenlakeUser> _userManager;
+        private readonly UserManager<RunGreenLakeUser> _userManager;
 
-        public ConfirmEmailModel(UserManager<rungreenlakeUser> userManager)
+        public ConfirmEmailModel(UserManager<RunGreenLakeUser> userManager)
         {
             _userManager = userManager;
         }
