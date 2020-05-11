@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using rungreenlake.web.Areas.Identity.Data;
+using rungreenlake.web.Data;
 
 namespace rungreenlake.web.Migrations
 {
-    [DbContext(typeof(Context))]
-    [Migration("20200506223345_AddFirstLastName")]
-    partial class AddFirstLastName
+    [DbContext(typeof(ApplicationDbContext))]
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,6 +154,154 @@ namespace rungreenlake.web.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("rungreenlake.Models.BuddyState", b =>
+                {
+                    b.Property<int>("FirstProfileID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SecondProfileID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProfileID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("FirstProfileID", "SecondProfileID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.HasIndex("SecondProfileID");
+
+                    b.ToTable("BuddyList");
+                });
+
+            modelBuilder.Entity("rungreenlake.Models.Conversation", b =>
+                {
+                    b.Property<int>("ThreadID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MessageID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DateRead")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ReadFlag")
+                        .HasColumnType("int");
+
+                    b.HasKey("ThreadID", "MessageID");
+
+                    b.HasIndex("MessageID")
+                        .IsUnique();
+
+                    b.ToTable("Conversations");
+                });
+
+            modelBuilder.Entity("rungreenlake.Models.Message", b =>
+                {
+                    b.Property<int>("MessageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DateSent")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MsgBody")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MsgHeader")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MsgSenderID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProfileID")
+                        .HasColumnType("int");
+
+                    b.HasKey("MessageID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("rungreenlake.Models.Profile", b =>
+                {
+                    b.Property<int>("ProfileID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LinkID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProfileID");
+
+                    b.HasIndex("LinkID")
+                        .IsUnique();
+
+                    b.ToTable("Profiles");
+                });
+
+            modelBuilder.Entity("rungreenlake.Models.RaceRecord", b =>
+                {
+                    b.Property<int>("RaceRecordID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MileTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProfileID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RaceTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RaceType")
+                        .HasColumnType("int");
+
+                    b.HasKey("RaceRecordID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.ToTable("RaceRecords");
+                });
+
+            modelBuilder.Entity("rungreenlake.Models.Thread", b =>
+                {
+                    b.Property<int>("ThreadID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("InitiatorID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProfileID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReceiverID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ThreadID");
+
+                    b.HasIndex("InitiatorID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.HasIndex("ReceiverID");
+
+                    b.ToTable("Threads");
+                });
+
             modelBuilder.Entity("rungreenlake.web.Areas.Identity.Data.RunGreenLakeUser", b =>
                 {
                     b.Property<string>("Id")
@@ -184,6 +330,11 @@ namespace rungreenlake.web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
+
+                    b.Property<int>("LinkID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -228,36 +379,7 @@ namespace rungreenlake.web.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("rungreenlake.web.Pages.Races.RaceRecord", b =>
-                {
-                    b.Property<int>("RaceRecordID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("MileTime")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProfileID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RaceTime")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RaceType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RunGreenLakeUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("RaceRecordID");
-
-                    b.HasIndex("RunGreenLakeUserId");
-
-                    b.ToTable("RaceRecord");
+                    b.ToTable("RunGreenLakeUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -311,11 +433,83 @@ namespace rungreenlake.web.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("rungreenlake.web.Pages.Races.RaceRecord", b =>
+            modelBuilder.Entity("rungreenlake.Models.BuddyState", b =>
                 {
-                    b.HasOne("rungreenlake.web.Areas.Identity.Data.RunGreenLakeUser", null)
-                        .WithMany("RaceRecords")
-                        .HasForeignKey("RunGreenLakeUserId");
+                    b.HasOne("rungreenlake.Models.Profile", "FirstProfile")
+                        .WithMany()
+                        .HasForeignKey("FirstProfileID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("rungreenlake.Models.Profile", null)
+                        .WithMany("Buddies")
+                        .HasForeignKey("ProfileID");
+
+                    b.HasOne("rungreenlake.Models.Profile", "SecondProfile")
+                        .WithMany()
+                        .HasForeignKey("SecondProfileID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("rungreenlake.Models.Conversation", b =>
+                {
+                    b.HasOne("rungreenlake.Models.Message", "Message")
+                        .WithOne("Conversation")
+                        .HasForeignKey("rungreenlake.Models.Conversation", "MessageID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("rungreenlake.Models.Thread", "Thread")
+                        .WithMany("Conversations")
+                        .HasForeignKey("ThreadID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("rungreenlake.Models.Message", b =>
+                {
+                    b.HasOne("rungreenlake.Models.Profile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileID");
+                });
+
+            modelBuilder.Entity("rungreenlake.Models.Profile", b =>
+                {
+                    b.HasOne("rungreenlake.web.Areas.Identity.Data.RunGreenLakeUser", "LoginUser")
+                        .WithOne("UserProfile")
+                        .HasForeignKey("rungreenlake.Models.Profile", "LinkID")
+                        .HasPrincipalKey("rungreenlake.web.Areas.Identity.Data.RunGreenLakeUser", "LinkID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("rungreenlake.Models.RaceRecord", b =>
+                {
+                    b.HasOne("rungreenlake.Models.Profile", "RaceProfile")
+                        .WithMany("TimeEntries")
+                        .HasForeignKey("ProfileID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("rungreenlake.Models.Thread", b =>
+                {
+                    b.HasOne("rungreenlake.Models.Profile", "InitiatorProfile")
+                        .WithMany()
+                        .HasForeignKey("InitiatorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("rungreenlake.Models.Profile", null)
+                        .WithMany("MessageThread")
+                        .HasForeignKey("ProfileID");
+
+                    b.HasOne("rungreenlake.Models.Profile", "ReceiverProfile")
+                        .WithMany()
+                        .HasForeignKey("ReceiverID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

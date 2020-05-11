@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using rungreenlake.data;
+using rungreenlake.web.Areas.Identity.Data;
 
 namespace rungreenlake.web.Migrations
 {

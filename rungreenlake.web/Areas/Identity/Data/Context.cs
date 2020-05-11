@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using rungreenlake.web.Areas.Identity.Data;
+using rungreenlake.Models;
 
-namespace rungreenlake.data
+namespace rungreenlake.web.Areas.Identity.Data
 {
     public class Context : IdentityDbContext<RunGreenLakeUser>
     {
@@ -23,7 +24,7 @@ namespace rungreenlake.data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<RunGreenLakeUser>().HasMany(u => u.BuddyStates).WithOne(u => u.SecondProfile);
         }
+
     }
 }

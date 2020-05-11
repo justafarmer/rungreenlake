@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using rungreenlake.web.Pages;
-using rungreenlake.web.Pages.Races;
+using System.ComponentModel.DataAnnotations.Schema;
+using rungreenlake.Models;
+
 
 namespace rungreenlake.web.Areas.Identity.Data
 {
@@ -24,7 +23,10 @@ namespace rungreenlake.web.Areas.Identity.Data
         [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
         public string LastName { get; set; }
 
-        public ICollection<RaceRecord> RaceRecords { get; set; }
-        public ICollection<BuddyState> BuddyStates { get; set; }
+        //secondary key, easy to display, used to link all other related data.
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int LinkID { get; set; }
+
+        public Profile UserProfile { get; set; }
     }
 }

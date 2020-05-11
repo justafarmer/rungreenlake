@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using rungreenlake.data;
 using rungreenlake.web.Areas.Identity.Data;
 
 [assembly: HostingStartup(typeof(rungreenlake.web.Areas.Identity.IdentityHostingStartup))]

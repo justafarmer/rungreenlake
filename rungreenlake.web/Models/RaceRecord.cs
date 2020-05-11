@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using rungreenlake.web.Areas.Identity.Data;
 
-namespace rungreenlake.web.Pages.Races
+namespace rungreenlake.Models
 {
     public class RaceRecord
     {
@@ -25,5 +29,7 @@ namespace rungreenlake.web.Pages.Races
 
         //calculated based on type and time
         public int MileTime { get; set; }
+
+        public Profile RaceProfile { get; set; }
     }
 }
