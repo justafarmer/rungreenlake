@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ *+++Message+++
+ * Message will keep track of all messages in the system.  It will
+ * track the Profile ID of the sender, the date it was sent and contains 
+ * the message body and the header.
+ * 
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

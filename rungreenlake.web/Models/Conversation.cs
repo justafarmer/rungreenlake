@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ *+++Conversation+++
+ * Conversation serves to decouple the messages from the thread, this
+ * provides a way to organize the individual messages as they relate to a thread
+ * and keep track of whether they have been read and when they have been read.
+ * 
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

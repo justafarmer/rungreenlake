@@ -1,4 +1,20 @@
-﻿using System.Threading.Tasks;
+﻿/*
+ *+++ProfilesController+++
+ * 
+ * Controller for profiles, used for the profile views.  Displays information
+ * about a user including profile, personal time entries and personal buddy lists.
+ * 
+ * Requirement 1:  User profile.
+ *      -Links to RunGreenLakeUser to display full name
+ *      -All Race Information Listed
+ *      
+ * Requirement 2:  PaceBuddy.
+ *      -Requires a profile to view other race times.
+ *      -Registration requires a time entry (profile contains at least one race).
+ *      -Displays all buddy statuses for a user (buddy, blocked or pending)
+ *
+*/
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using rungreenlake.Models;
@@ -26,7 +42,7 @@ namespace SprintOne.Controllers
             _userManager = userManager;
         }
 
-        // GET: RaceRecords
+        // GET: All profiles.
         public async Task<IActionResult> AllProfile()
         {
             var profiles = _context.Profiles;
@@ -35,17 +51,22 @@ namespace SprintOne.Controllers
 
         }
 
+        //Base Index page for personal profile view.
         public async Task<IActionResult> Index(string? show)
         {
+            //gets current logged in user
             var currid = GetUserID();
             var viewModel = new ProfileViewModel();
 
+            //Loads current logged in user and profile.
             viewModel.MyProfile = _context.Profiles.Find(currid);
             viewModel.MyUser = await _context.RunGreenLakeUsers
                 .FirstOrDefaultAsync(i => i.LinkID == currid);
 
+            //Ensures not null.
             if (show != null)
             {
+                //If user clicked on show buddy list, load buddy list for the view.
                 if (show.Equals("mybuddies"))
                 {
                     var buddyList = _context.BuddyList
@@ -86,6 +107,7 @@ namespace SprintOne.Controllers
                     }
                 }
 
+                //If user clicked on show time entries, load personal time entries for the view.
                 if (show.Equals("myracerecords"))
                 {
                     viewModel.MyRaceRecords = await _context.RaceRecords
@@ -99,7 +121,7 @@ namespace SprintOne.Controllers
 
         }
 
-        // GET: Users/Details/5
+        //Shows details when a user clicks on another's profile.
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -109,18 +131,23 @@ namespace SprintOne.Controllers
 
             var currid = GetUserID();
             var user = new ProfileViewModel();
+
+            //Retrieves profile for a specific user.
             user.MyProfile = await _context.Profiles
                     .Include(s => s.TimeEntries)
                     .AsNoTracking()
                     .FirstOrDefaultAsync(m => m.ProfileID == id);
 
+            //Retrieves user information for a specific user.
             user.MyUser = await _context.RunGreenLakeUsers
                     .FirstOrDefaultAsync(i => i.LinkID == id);
 
+            //Retrieves time entries for a specific user.
             user.MyRaceRecords = await _context.RaceRecords
                 .Where(p => p.ProfileID == id)
                 .ToListAsync();
 
+            //Checks status of user with person who is logged in, show status.
             var status = _context.BuddyList
                 .Where(b => (b.FirstProfileID == currid || b.SecondProfileID == currid) && (b.FirstProfileID == id || b.SecondProfileID == id))
                 .FirstOrDefault();
@@ -258,6 +285,7 @@ namespace SprintOne.Controllers
             return _context.Profiles.Any(e => e.ProfileID == id);
         }
 
+        //Retrieves user ID of user that is logged in.
         public int GetUserID()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

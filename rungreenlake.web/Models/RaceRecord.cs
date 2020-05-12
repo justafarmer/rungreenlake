@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ *+++RaceRecord+++
+ * RaceRecord will consist of all the User entered race times,
+ * each race type will be recorded along with a total time, in seconds,
+ * and a mile time, in seconds.
+ * 
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,12 +24,6 @@ namespace rungreenlake.Models
 
         // 1 = 1 mile, 2 = 5k, 3 = 10k, 4 = Half Marathon, 5 = Marathon
         public int RaceType { get; set; }
-
-        /*
-        public int RaceTimeHours { get; set; }
-        public int RaceTimeMinutes { get; set; }
-        public int RaceTimeSeconds { get; set; }
-        */
 
         //Total time, in seconds, for the race.
         public int RaceTime { get; set; }

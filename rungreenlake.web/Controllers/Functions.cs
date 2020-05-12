@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ *+++Functions+++
+ * Generic functions used for calculations, etc.
+ * 
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +12,7 @@ namespace rungreenlake.Controllers
 {
     public class Functions
     {
+        //Returns the mile time from total time and the race type.
         public static int GetMileTime(int total, int type)
         {
             var mileTime = 0;

@@ -1,4 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/*
+ *+++LoginViewModel+++
+ * This is the loginview model, allowing a user to enter their 
+ * username and password and login.
+ * This is an old version.
+ * 
+*/
+
+using System.ComponentModel.DataAnnotations;
 
 namespace rungreenlake.Models
 {

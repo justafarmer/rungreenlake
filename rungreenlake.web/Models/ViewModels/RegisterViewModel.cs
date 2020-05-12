@@ -1,4 +1,11 @@
-﻿using rungreenlake.Models.ViewModels;
+﻿/*
+ *+++RegisterViewModel+++
+ * RegisterViewModel is the view model for the registartion page.  
+ * This is an old version.
+ * 
+*/
+
+using rungreenlake.Models.ViewModels;
 using System.ComponentModel.DataAnnotations;
 
 namespace rungreenlake.Models

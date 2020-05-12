@@ -1,4 +1,18 @@
-﻿using System;
+﻿/*
+ *+++RegistrationPage+++
+ * Page for registration.  A user must enter an initial time entry to sign up for the website,
+ * their e-mail will be the user's login name.  The page will prompt a user if an invalid
+ * entry was made.
+ * 
+ * Requirement 1:  User Profile
+ *      -Email access.
+ *      -Ability to change password.
+ *      -Change first and last name
+ *      -Change other associated details.
+ * 
+*/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -205,6 +219,8 @@ namespace rungreenlake.web.Areas.Identity.Pages.Account
                 }
 
                 /*
+                 * 
+                 * EMAIL CONFIRMATION, TEMPORARILY BYPASSED
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

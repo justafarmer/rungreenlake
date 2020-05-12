@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿/*
+ *+++MailboxViewModel+++
+ * Allows a user to see their current messages and conversations.
+ * 
+*/
+
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +17,12 @@ namespace rungreenlake.Models.ViewModels
     public class MailboxViewModel
     {
         
-        public string ReceiverString { get; set; }
-
+        //Reply Data
         public int ReceiverID { get; set; }
+        public int MsgID { get; set; }
+        public Profile ReceiverProfile { get; set; }
+        public RunGreenLakeUser ReceiverUser { get; set; }
+        public Message MessageReplyingTo { get; set; }
 
         [Required]
         [MinLength(5)]

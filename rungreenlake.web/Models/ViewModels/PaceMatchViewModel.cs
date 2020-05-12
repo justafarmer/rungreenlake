@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ *+++PaceMatchViewModel+++
+ * This is used to show the best race times for a user,
+ * from here they can click on the time entry and view ALL
+ * of the records for that user and some of the details from their profile.
+ * 
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,10 +21,5 @@ namespace rungreenlake.Models.ViewModels
         public int Lower { get; set; }
         public int Upper { get; set; }
 
-        /*
-        public IEnumerable<RaceRecord> RaceRecords { get; set; }
-        public IEnumerable<User> Users { get; set; }
-        public IEnumerable<BuddyState> Buddies { get; set; }
-        */
     }
 }

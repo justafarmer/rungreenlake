@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ *+++Profile+++
+ * Profile serves as a link betwee the AspNetUser (RunGreenLakeUser in
+ * this case) entity and the rest of the related entities.  This will consist
+ * of the needed navigation properties and the creation date of the profile.
+ * Here, more properties can be easily added if needed.
+ * 
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ *+++RunGreenLakeUser+++
+ * Entity for the user, which combines properties with IdentityUser.
+ * LinkID is used to couple this entity with the profile entity.
+ * 
+*/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;

@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ *+++ApplicationDbContext+++
+ * Database context, this builds the database based on the models and relationships outlined.
+ * 
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -59,18 +65,6 @@ namespace rungreenlake.web.Data
                 .HasForeignKey(p => p.SecondProfileID)
                 .OnDelete(DeleteBehavior.NoAction)
                 ;
-            /*
-            builder.Entity<BuddyState>()
-                .HasOne(p => p.FirstProfile)
-                .WithOne()
-                .HasForeignKey<BuddyState>(p => p.FirstProfileID)
-                ;
-            builder.Entity<BuddyState>()
-                .HasOne(p => p.SecondProfile)
-                .WithOne()
-                .HasForeignKey<BuddyState>(p => p.SecondProfileID)
-                ;
-                */
 
             //Thread table creation.
             builder.Entity<Thread>().ToTable("Threads");

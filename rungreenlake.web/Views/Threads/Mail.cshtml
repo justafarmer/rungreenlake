@@ -1,4 +1,9 @@
-﻿@model rungreenlake.Models.ViewModels.MailboxViewModel
+﻿<!--
+***Mail***
+    Message View
+-->
+
+@model rungreenlake.Models.ViewModels.MailboxViewModel
 
 @{
     ViewData["Title"] = "Mail";
@@ -42,7 +47,7 @@
 @if (Model.Messages != null)
 {
     <h1> Conversations </h1>
-    <table class="table">
+    <table class="table table-bordered">
         @foreach (var item in Model.Messages)
         {
             <tr>
@@ -50,12 +55,18 @@
                     Subject:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>@Html.DisplayFor(modelItem => item.MsgHeader)</b>
                 </td>
                 <td>
-                    Sent By:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>@Html.DisplayFor(modelItem => item.Profile)</b>
+                    Sent By:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>@Html.DisplayFor(modelItem => item.Profile.LoginUser.FirstName) @Html.DisplayFor(modelItem => item.Profile.LoginUser.LastName)</b>
+                </td>
+                <td>
+                    Sender Profile ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>@Html.DisplayFor(modelItem => item.Profile.ProfileID)</b>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
                     @Html.DisplayFor(modelItem => item.MsgBody)
+                </td>
+                <td colspan="1">
+                    <a asp-controller="Threads" asp-action="Reply" asp-route-msgid="@item.MessageID">Reply</a>
                 </td>
             </tr>
         }

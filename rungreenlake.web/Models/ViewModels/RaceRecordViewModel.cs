@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ *+++RaceRecordViewModel+++
+ * This view model is for user time entries, to add delete and create
+ * new entries.
+ * 
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

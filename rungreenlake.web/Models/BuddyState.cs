@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ *+++BuddyState+++
+ * BuddyState keeps track of whether a user is linked in some way 
+ * with another, whether they have a pending request, a friendship or
+ * are blocked.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

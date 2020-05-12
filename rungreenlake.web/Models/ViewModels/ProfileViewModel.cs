@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ *+++ProfileViewModel+++
+ * This view model allows a user to see their race profile, not
+ * to be confused with their account page.  This will allow
+ * viewing buddy lists and race entries.
+ * 
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,13 +27,5 @@ namespace rungreenlake.Models.ViewModels
         public List<RunGreenLakeUser> MyListBlocked { get; set; }
         public IEnumerable<RaceRecord> MyRaceRecords { get; set; }
 
-        /*
-        public User myProfile { get; set; }
-
-        public RaceRecord myBestTime { get; set; }
-
-        public ICollection<User> MyBuddyList { get; set; }
-        public ICollection<RaceRecord> MyRaceRecords { get; set; }
-        */
     }
 }

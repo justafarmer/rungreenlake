@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ *+++ThreadsController+++
+ * Controller for displaying and sending messages, managing in box.
+ * 
+ * Requirement 2: PaceBuddy
+ *      -Message a user.
+ *      -View all messages in your mailbox.
+ *      
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,7 +38,7 @@ namespace SprintOne.Controllers
             _userManager = userManager;
         }
 
-        // GET: Threads
+        // GET: Show all threads, or messages.
         public async Task<IActionResult> Index(int? retrieveThreadID)
         {
             var viewModel = new MailboxViewModel();
@@ -51,6 +61,7 @@ namespace SprintOne.Controllers
             //return View(await _context.Threads.ToListAsync());
         }
 
+        //GET:  Show all messages for the requesting user.
         public async Task<IActionResult> Mail(int? retrieveThreadID)
         {
             var currid = GetUserID();
@@ -88,7 +99,7 @@ namespace SprintOne.Controllers
         }
 
 
-        // GET: Threads/Details/5
+        // GET: Show details of a message.
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -106,7 +117,7 @@ namespace SprintOne.Controllers
             return View(thread);
         }
 
-        // GET: Threads/Create
+        // GET: Send a new message. initial view.
         public IActionResult Send()
         {
             var viewModel = new MailboxViewModel();
@@ -119,7 +130,7 @@ namespace SprintOne.Controllers
         }
 
 
-        // POST: Threads/Create
+        // POST: Create a message, if succesful, and load into the DB.
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -159,6 +170,79 @@ namespace SprintOne.Controllers
             return View(mailBox);
         }
 
+        public IActionResult Reply(int? msgid)
+        {
+            if (msgid == null)
+            {
+                return RedirectToAction(nameof(Mail));
+            }
+            else
+            {
+                var replyView = new MailboxViewModel();
+                replyView.MessageReplyingTo = _context.Messages
+                    .Where(m => m.MessageID == msgid)
+                    .Single();
+
+                replyView.ReceiverProfile = _context.Profiles
+                    .Where(p => p.ProfileID == replyView.MessageReplyingTo.MsgSenderID)
+                    .Single();
+
+                replyView.ReceiverUser = _context.RunGreenLakeUsers
+                    .Where(u => u.LinkID == replyView.ReceiverProfile.LinkID)
+                    .Single();
+
+                return View(replyView);
+            }
+         
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reply([Bind("MsgID", "Header", "Body")] MailboxViewModel sendReply)
+        {
+            if (ModelState.IsValid)
+            {
+
+                //get thread ID
+                var currid = GetUserID();
+
+                var thread = _context.Conversations
+                    .Where(m => m.MessageID == sendReply.MsgID)
+                    .Select(p => p.ThreadID)
+                    .FirstOrDefault();
+
+                var addMessage = new Message();
+                addMessage.MsgHeader = sendReply.Header;
+                addMessage.MsgBody = sendReply.Body;
+                addMessage.MsgSenderID = currid;
+                _context.Add(addMessage);
+                await _context.SaveChangesAsync();
+
+                var addConversation = new Conversation();
+                addConversation.MessageID = addMessage.MessageID;
+                addConversation.ThreadID = thread;
+                _context.Add(addConversation);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Mail));
+            }
+            else
+            {
+                sendReply.MessageReplyingTo = _context.Messages
+                    .Where(m => m.MessageID == sendReply.MsgID)
+                    .Single();
+
+                sendReply.ReceiverProfile = _context.Profiles
+                    .Where(p => p.ProfileID == sendReply.MessageReplyingTo.MsgSenderID)
+                    .Single();
+
+                sendReply.ReceiverUser = _context.RunGreenLakeUsers
+                    .Where(u => u.LinkID == sendReply.ReceiverProfile.LinkID)
+                    .Single();
+
+                return View(sendReply);
+            }
+
+        }
 
 
         // GET: Threads/Create

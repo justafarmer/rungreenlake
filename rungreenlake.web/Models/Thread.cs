@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ *+++Threads+++
+ * Thread will keep track of all messages within a thread, 
+ * linked to the messages through the Conversation entity.
+ * 
+*/ 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

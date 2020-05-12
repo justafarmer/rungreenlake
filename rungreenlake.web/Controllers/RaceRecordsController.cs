@@ -1,4 +1,18 @@
-﻿using System;
+﻿/*
+ *+++RaceRecordsController+++
+ * Controller for RaceRecords, used for users to enter time entries, view 
+ * time entries, ediit time entries, delete time entries and find users based
+ * on their best mile time.
+ * 
+ * Requirement 2:  PaceBuddy Feature : Time Entries
+ *      -Ability to add, create, edit and delete personal time entries.
+ *      -Ability to view time entries.
+ *      -Ability to view best mile times for a user (pace).
+ *      -Ability to view details for a user navigating from their time entry.
+ *      -View buddy state (if buddy, blocked or no state at all)
+ *
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,6 +50,7 @@ namespace SprintOne.Controllers
             //return View(await _context.RaceRecords.ToListAsync());
         }
 
+        //Retrieves, groups and shows each user's best mile time.
         public async Task<IActionResult> IndexMatch(int? lower, int? upper)
         {
             IQueryable<PaceMatchViewModel> q =
@@ -70,8 +85,12 @@ namespace SprintOne.Controllers
             if (ModelState.IsValid)
             {
                 var currid = GetUserID();
+
+                //Load total time and race time, combining hours minutes and seconds from user entered data.
                 int totalTime = raceRecordView.RaceTimeHours * 3600 + raceRecordView.RaceTimeMinutes * 60 + raceRecordView.RaceTimeSeconds;
                 int mileTime = Functions.GetMileTime(totalTime, raceRecordView.RaceType);
+
+                //Ensure mile time is not too fast.
                 if (mileTime > 223)
                 {
                     var race = new RaceRecord
@@ -85,6 +104,7 @@ namespace SprintOne.Controllers
 
                     try
                     {
+                        //Add record to database.
                         _context.Add(race);
                         await _context.SaveChangesAsync();
                         //return RedirectToAction("Index", "Profiles", new {@show = "myracerecords"});
@@ -104,7 +124,7 @@ namespace SprintOne.Controllers
             return View(raceRecordView);
         }
 
-        // GET: RaceRecords/Edit/5
+        //GET: Edit personal race record, start by showing information regarding record.
         public async Task<IActionResult> EditPersonal(int? id)
         {
 
@@ -134,7 +154,7 @@ namespace SprintOne.Controllers
             return View(viewModel);
         }
 
-        // POST: RaceRecords/Edit/5
+        // POST: Save edited record, if succesful.
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -193,7 +213,7 @@ namespace SprintOne.Controllers
             return View(viewModel);
         }
 
-        // GET: RaceRecords/Delete/5
+        // GET: Delete personal race record.
         public async Task<IActionResult> DeletePersonal(int? id)
         {
             if (id == null)
@@ -212,7 +232,7 @@ namespace SprintOne.Controllers
             return View(raceRecord);
         }
 
-        // POST: RaceRecords/Delete/5
+        // POST: Delete confirmation.
         [HttpPost, ActionName("DeletePersonal")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeletePersonalConfirmed(int id)
@@ -224,16 +244,21 @@ namespace SprintOne.Controllers
         }
 
 
+        //Show page for creation success.
         public IActionResult CreatePersonalSuccess(RaceRecord viewModel)
         {
             return View(viewModel);
         }
 
+
+        //Show page for deletion success.
         public IActionResult DeletePersonalSuccess(RaceRecord viewModel)
         {
             return View(viewModel);
         }
 
+
+        //Show page for edit success.
         public IActionResult EditPersonalSuccess(RaceRecord viewModel)
         {
             return View(viewModel);
@@ -260,7 +285,6 @@ namespace SprintOne.Controllers
 
             return View(raceRecord);
         }
-
 
         public IActionResult Create()
         {
